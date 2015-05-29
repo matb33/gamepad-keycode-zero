@@ -21,7 +21,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
 
-        <preference name="xwalkVersion" value="14+" />
+        <preference name="xwalkVersion" value="14.43.343.9" />
         <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect --allow-file-access-from-files" />
     </platform>
 </widget>
