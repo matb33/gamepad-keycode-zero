@@ -12,20 +12,6 @@
     <name>GamepadKeycodeZero</name>
     <description>Demonstrate keyCode 0 being fired for A, B, X, Y buttons</description>
     <author email="matb33@gmail.com" href="http://github.com/matb33">Mathieu Bouchard</author>
-    <preference name="webviewbounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="SplashScreenDelay" value="2000" />
-    <preference name="KeyboardShrinksView" value="false" />
-    <preference name="HideKeyboardFormAccessoryBar" value="true" />
-    <preference name="AllowInlineMediaPlayback" value="true" />
-    <preference name="BackupWebStorage" value="none" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#00A1D7" />
-    <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="Orientation" value="default" />
-    <preference name="EnableViewportScale" value="true" />
-    <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    <preference name="TopActivityIndicator" value="white" />
     <content src="gamepad-keycode-zero.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
