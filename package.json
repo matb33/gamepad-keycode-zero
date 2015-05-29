@@ -1,0 +1,8 @@
+{
+	"name": "gamepad-keycode-zero",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"cordova": "5.0.0"
+	}
+}

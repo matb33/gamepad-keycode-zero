@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>gamepad-keycode-zero</title>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script>
+
+// USAGE
+
+// 1. Build without crosswalk by commenting-out the following line in config.xml:
+//      <plugin name="cordova-plugin-crosswalk-webview" version="1.2.0" />
+// 2. Load the app on a Nexus/FireTV/Shield/Android TV with a gamepad;
+// 3. Hit various buttons (A, B, back), notice that the B button logs a
+//      [backbutton] event;
+// 4. Build with crosswalk (un-comment the plugin reference);
+// 5. Load the app as per #2;
+// 6. Hit various buttons (A, B, back), notice that the B button does NOT log a
+//      [backbutton] event at all.
+
+// DETAILS
+
+// This example cordova app illustrates that when crosswalk is used, the B
+// button on a gamepad will not fire the backbutton event. Without crosswalk,
+// the backbutton event will fire upon release of the B button (keyup can be
+// used to prevent the backbutton event from being fired).
+
+// That being said, keyup (and keydown) cannot discern the difference between
+// most buttons except for d-pad -- they are all reported as having keyCode 0.
+// This is the case both with and without crosswalk, so is not specific to
+// crosswalk.
+
+// By implementing gamepad code manually using gamepadconnected etc, this code
+// is then responsible for triggering events on button presses. Browsers will
+// not recognize these events as having been "user-initiated". Mobile browsers
+// commonly use this heuristic to prevent things like on-screen keyboards or
+// autoplay features from being triggered without user-initiated actions.
+
+function onload() {
+    if (window.cordova) {
+        document.addEventListener("deviceready", startup, false);
+    } else {
+        startup();
+    }
+}
+
+function startup() {
+    var textarea = document.getElementById("textarea");
+    textarea.focus();
+
+    document.documentElement.addEventListener("keyup", function (evt) {
+        console_log("[keyup] type:", evt.type, "keyCode:", evt.keyCode, "which:", evt.which);
+
+        // If you enable preventDefault below, the backbutton event will not
+        // fire when hitting the B button:
+        // evt.preventDefault();
+    });
+
+    document.addEventListener("backbutton", function (evt) {
+        console_log("[backbutton]", JSON.stringify(evt));
+    }, false);
+}
+
+function console_log() {
+    console.log.apply(console, arguments);
+    log("LOG", Array.prototype.slice.call(arguments).join(" "));
+}
+
+function console_error() {
+    console.error.apply(console, arguments);
+    log("ERR", Array.prototype.slice.call(arguments).join(" "));
+}
+
+function log(type, log) {
+    var textarea = document.getElementById("textarea");
+    var val = textarea.value;
+    var datestamp = new Date().toISOString();
+    var newVal = (val ? (val + "\n") : "") + type + " [" + datestamp + "] " + log;
+    var trimVal = newVal.substr(-32767);
+
+    textarea.value = trimVal;
+
+    setTimeout(function () {
+        if (textarea) textarea.scrollTop = textarea.scrollHeight;
+    }, 0);
+}
+
+        </script>
+    </head>
+    <body onload="onload()">
+        <textarea style="width:100%;height:490px;font-family:monospace;" id="textarea"></textarea>
+    </body>
+</html>
